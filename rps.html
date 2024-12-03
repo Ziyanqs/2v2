@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors Game</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            background-color: #000;
+            color: #f5c518;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        h1, h2 {
+            color: #f5c518;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 30px;
+        }
+        h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+        .choice {
+            background-color: #d32f2f;
+            padding: 15px 30px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 10px;
+            font-size: 1.2em;
+            transition: transform 0.2s, background-color 0.3s;
+            color: #fff;
+            border: 2px solid #f5c518;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .choice:hover {
+            background-color: #c62828;
+            transform: scale(1.1);
+        }
+        .hidden {
+            visibility: hidden;
+        }
+        .result {
+            font-size: 2em;
+            margin-top: 40px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            color: #f5c518;
+        }
+        .reset-btn {
+            margin-top: 30px;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            cursor: pointer;
+            background-color: #d32f2f;
+            border: 2px solid #f5c518;
+            border-radius: 50px;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, box-shadow 0.3s;
+            display: none;
+        }
+        .reset-btn:hover {
+            background-color: #c62828;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>ROCK✊ PAPER✋ SCISSOR✂️ SHOOOOOT🔫</h1>
+
+    <div id="player1Section">
+        <h2>P1 MAKE A CHOICE 1️⃣</h2>
+        <div>
+            <span class="choice" onclick="player1Choice('rock')">✊ ROCK</span>
+            <span class="choice" onclick="player1Choice('paper')">✋ PAPER</span>
+            <span class="choice" onclick="player1Choice('scissors')">✂️ SCISSORS</span>
+        </div>
+    </div>
+
+    <div id="player2Section" class="hidden">
+        <h2>P2 MAKE A CHOICE 2️⃣</h2>
+        <div>
+            <span class="choice" onclick="player2Choice('rock')">✊ ROCK</span>
+            <span class="choice" onclick="player2Choice('paper')">✋ PAPER</span>
+            <span class="choice" onclick="player2Choice('scissors')">✂️ SCISSORS</span>
+        </div>
+    </div>
+
+    <div id="result" class="result hidden"></div>
+    <button id="resetButton" class="reset-btn" onclick="resetGame()">PLAY AGAIN!!✊✋✂️</button>
+
+    <script>
+        let player1Pick = "";
+        let player2Pick = "";
+
+        function player1Choice(choice) {
+            player1Pick = choice;
+            document.getElementById('player1Section').classList.add('hidden');
+            document.getElementById('player2Section').classList.remove('hidden');
+        }
+
+        function player2Choice(choice) {
+            player2Pick = choice;
+            document.getElementById('player2Section').classList.add('hidden');
+            determineWinner();
+        }
+
+        function determineWinner() {
+            let result = "";
+            if (player1Pick === player2Pick) {
+                result = "ITS A TIE!\n✊✊✋✋✂️✂️";
+            } else if (
+                (player1Pick === 'rock' && player2Pick === 'scissors') ||
+                (player1Pick === 'scissors' && player2Pick === 'paper') ||
+                (player1Pick === 'paper' && player2Pick === 'rock')
+            ) {
+                result = "PLAYER 1️⃣ WINS!";
+            } else {
+                result = "PLAYER 2️⃣ WINS!";
+            }
+
+            // Show the result and the choices of both players
+            document.getElementById('result').innerText = `P1 CHOSE✊✋✂️: ${player1Pick}\nP2 CHOSE✊✋✂️: ${player2Pick}\n${result}`;
+            document.getElementById('result').classList.remove('hidden');
+
+            // Show the reset button
+            document.getElementById('resetButton').style.display = 'block';
+        }
+
+        function resetGame() {
+            player1Pick = "";
+            player2Pick = "";
+            document.getElementById('player1Section').classList.remove('hidden');
+            document.getElementById('player2Section').classList.add('hidden');
+            document.getElementById('result').classList.add('hidden');
+            document.getElementById('resetButton').style.display = 'none';
+        }
+    </script>
+
+<footer>
+    <p>&copy; 2024 Two Player Games</p>
+</footer>
+
+</body>
+</html>

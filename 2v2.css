@@ -1,0 +1,85 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #31d774, #6773a9);
+    color: #785e5e;
+    margin: 0;
+    padding: 20px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    color: #000000;
+    font-size: 3em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-family: 'Times New Roman', Times, serif;
+}
+
+p {
+    color: #000000;
+    font-size: 1.2em;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.game-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button {
+    background-color: #5ed4f4;
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 12px 45px;
+    margin: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+button:hover {
+    background-color: #0054a2;
+    transform: translateY(-5px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+footer {
+    text-align: center;
+    margin-top: 50px;
+    color: #fff;
+    font-size: 0.9em;
+}
+
+/* New styles for game images */
+.game-images {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.game-image {
+    width: 200px;  /* Adjust as needed */
+    height: auto;  /* Maintain aspect ratio */
+    margin: 10px;  /* Spacing between images */
+    border-radius: 10px;  /* Round corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* Optional shadow */
+    transition: transform 0.3s ease;  /* Add a smooth transition effect */
+}
+
+.p-image {
+    width: 100px;
+}
+

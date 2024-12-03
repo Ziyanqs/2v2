@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roll the Dice</title>
+    <link rel="stylesheet" href="rolldice.css">
+</head>
+
+<body>
+    <h1>Roll the Dice (instructions on the bottom)</h1>
+
+    <div id="game">
+        <div id="player1">
+            <h2>Player 1</h2>
+            <p>Score: <span id="player1Score">0</span></p>
+            <button id="rollPlayer1">Roll Dice</button>
+            <p>Dice 1: <span id="player1Dice1">0</span></p>
+            <p>Dice 2: <span id="player1Dice2">0</span></p>
+        </div>
+
+        <div id="player2">
+            <h2>Player 2</h2>
+            <p>Score: <span id="player2Score">0</span></p>
+            <button id="rollPlayer2">Roll Dice</button>
+            <p>Dice 1: <span id="player2Dice1">0</span></p>
+            <p>Dice 2: <span id="player2Dice2">0</span></p>
+        </div>
+
+        <button id="endRound">End Round</button>
+
+        <h2 id="winner"></h2>
+    </div>
+    <h2>INSTRUCTIONS:</h2>
+    <ul>
+        <li>Player 1 rolls first.</li>
+        <li>Player 2 rolls second.</li>
+        <li>End game to reveal the result.</li>
+    </ul>
+
+    <footer>
+        <p>&copy; 2024 Two Player Games</p>
+    </footer>
+    
+    <script src="rolldice.js"></script>
+</body>
+</html>

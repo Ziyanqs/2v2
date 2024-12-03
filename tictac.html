@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            position: relative;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        h1 {
+            font-family: 'Times New Roman', Times, serif;
+            margin-bottom: 0;
+        }
+        p {
+            margin-top: 5px;
+        }
+        #gameBoard {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 5px;
+            position: relative;
+        }
+        .cell {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            background-color: rgb(145, 50, 234);
+            border: 2px solid #333;
+            cursor: pointer;
+        }
+        .cell:hover {
+            background-color: rgb(30, 255, 233);
+        }
+        #reset {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+        }
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none; /* Prevent the canvas from interfering with cell clicks */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Tic-Tac-Toe</h1>
+    <p id="status">Player X's turn</p>
+
+    <div id="gameBoard">
+        <canvas id="winLineCanvas" width="320" height="320"></canvas>
+        <div class="cell" data-index="0"></div>
+        <div class="cell" data-index="1"></div>
+        <div class="cell" data-index="2"></div>
+        <div class="cell" data-index="3"></div>
+        <div class="cell" data-index="4"></div>
+        <div class="cell" data-index="5"></div>
+        <div class="cell" data-index="6"></div>
+        <div class="cell" data-index="7"></div>
+        <div class="cell" data-index="8"></div>
+    </div>
+
+    <button id="reset">RESET</button>
+
+    <script>
+        let board = ['', '', '', '', '', '', '', '', ''];
+        let currentPlayer = 'X';
+        let gameActive = true;
+
+        const winningConditions = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
+
+        const statusDisplay = document.getElementById('status');
+        const cells = document.querySelectorAll('.cell');
+        const resetButton = document.getElementById('reset');
+        const canvas = document.getElementById('winLineCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function handleCellClick(event) {
+            const clickedCellIndex = event.target.getAttribute('data-index');
+
+            if (board[clickedCellIndex] !== '' || !gameActive) {
+                return;
+            }
+
+            board[clickedCellIndex] = currentPlayer;
+            event.target.innerText = currentPlayer;
+
+            checkWinner();
+        }
+
+        function drawWinningLine(startX, startY, endX, endY) {
+            ctx.beginPath();
+            ctx.moveTo(startX, startY);
+            ctx.lineTo(endX, endY);
+            ctx.lineWidth = 5;
+            ctx.strokeStyle = 'gold';
+            ctx.stroke();
+        }
+
+        function checkWinner() {
+            let roundWon = false;
+            let winningLine = null;
+
+            for (let i = 0; i < winningConditions.length; i++) {
+                const winCondition = winningConditions[i];
+                const a = board[winCondition[0]];
+                const b = board[winCondition[1]];
+                const c = board[winCondition[2]];
+
+                if (a === '' || b === '' || c === '') {
+                    continue;
+                }
+
+                if (a === b && b === c) {
+                    roundWon = true;
+                    winningLine = winCondition;
+                    break;
+                }
+            }
+
+            if (roundWon) {
+                statusDisplay.innerText = `Player ${currentPlayer} wins!`;
+                gameActive = false;
+                
+                // Coordinates for the winning lines
+                const lineCoordinates = {
+                    0: { start: [10, 50], end: [310, 50] }, // top row
+                    1: { start: [10, 160], end: [310, 160] }, // middle row
+                    2: { start: [10, 270], end: [310, 270] }, // bottom row
+                    3: { start: [50, 10], end: [50, 310] }, // left column
+                    4: { start: [160, 10], end: [160, 310] }, // middle column
+                    5: { start: [270, 10], end: [270, 310] }, // right column
+                    6: { start: [10, 10], end: [310, 310] }, // diagonal top-left to bottom-right
+                    7: { start: [310, 10], end: [10, 310] }  // diagonal top-right to bottom-left
+                };
+                
+                const { start, end } = lineCoordinates[winningConditions.indexOf(winningLine)];
+                drawWinningLine(...start, ...end);
+                return;
+            }
+
+            if (!board.includes('')) {
+                statusDisplay.innerText = `ITS A TIE GET BETTER!`;
+                gameActive = false;
+                return;
+            }
+
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+            statusDisplay.innerText = `Player ${currentPlayer}'s turn`;
+        }
+
+        function resetGame() {
+            board = ['', '', '', '', '', '', '', '', ''];
+            gameActive = true;
+            currentPlayer = 'X';
+            statusDisplay.innerText = `Player X's turn`;
+            cells.forEach(cell => cell.innerText = '');
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+        }
+
+        cells.forEach(cell => cell.addEventListener('click', handleCellClick));
+        resetButton.addEventListener('click', resetGame);
+    </script>
+
+<footer>
+    <p>&copy; 2024 Two Player Games</p>
+</footer>
+
+</body>
+</html>

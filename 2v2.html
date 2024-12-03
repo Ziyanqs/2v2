@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Player Games</title>
+    <link rel="stylesheet" href="2v2.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<div class="p-image">
+    <img src="https://imgur.com/kGeXe2A.png" alt="Profile picture" class="p-image">
+</div>
+
+<body>
+
+    <header>
+        <h1>Two Player Games</h1>
+        <p>Choose a game to play with a friend!</p>
+    </header>
+
+    <main>
+        <div class="game-buttons">
+            <button onclick="startGame('pingpong')">Ping Pong</button>
+            <button onclick="startGame('tictactoe')">Tic Tac Toe</button>
+            <button onclick="startGame('rockpaperscissors')">Rock Paper Scissors</button>
+            <button onclick="startGame('rolldice')">Dice Roll</button>
+            <button onclick="startGame('connectfour')">Connect Four</button>
+        </div>
+
+        <div class="game-images">
+            <img src="https://i.imgur.com/WKBrHZu.png" alt="Tic Tac Toe" class="game-image">
+            <img src="https://i.imgur.com/gaIJhHm.png" alt="Ping Pong" class="game-image">
+            <img src="https://i.imgur.com/P52y65J.png" alt="Rock Paper Scissors" class="game-image">
+            <img src="https://i.imgur.com/Yb6oEKK.png" alt="Connect Four" class="game-image">
+            <img src="https://i.imgur.com/iyIUJGW.png" alt="Dice Roll" class="game-image">
+        </div>
+
+    </main>
+    <footer>
+        <p>&copy; 2024 Two Player Games</p>
+    </footer>
+
+    <script>
+        function startGame(game) {
+            switch(game) {
+                case 'pingpong':
+                    window.open('cr.html', '_blank');
+                    break;
+                case 'tictactoe':
+                    window.open('tictac.html', '_blank');
+                    break;
+                case 'rockpaperscissors':
+                    window.open('rps.html', '_blank');
+                    break;
+                case 'rolldice':
+                    window.open('rolldice.html', '_blank');
+                    break;
+                case 'connectfour':
+                    window.open('connect4.html', '_blank');
+                    break;
+                default:
+                    alert('Game not found');
+            }
+        }
+    </script>
+</body>
+</html>
